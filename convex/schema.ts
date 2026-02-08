@@ -18,6 +18,20 @@ export default defineSchema({
       .index("byUserId", ["userId"])
       .index("byPayerUserId", ["payer.user_id"]),
 
+    // Voice notes from Telegram
+    notes: defineTable({
+      text: v.string(),
+      timestamp: v.number(),
+      userId: v.optional(v.id("users")),
+      telegramUserId: v.string(),
+      telegramUsername: v.optional(v.string()),
+      audioFileId: v.string(),
+      audioDuration: v.optional(v.number()),
+    })
+      .index("byTelegramUser", ["telegramUserId", "timestamp"])
+      .index("byUser", ["userId", "timestamp"])
+      .index("byTimestamp", ["timestamp"]),
+
     // Security monitoring table
     // userId is optional to allow logging violations from unauthenticated requests
     securityEvents: defineTable({

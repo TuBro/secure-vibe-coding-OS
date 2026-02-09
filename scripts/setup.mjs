@@ -4,9 +4,11 @@
  * Automated Setup Script for Secure Vibe Coding OS
  *
  * Subcommands:
- *   init         - Create Clerk app, generate secrets, write .env.local
- *   convex-setup - Login check, team selection, project creation (non-interactive)
- *   configure    - Set up webhook + Convex env vars (run after Convex setup)
+ *   init                - Create Clerk app, generate secrets, write .env.local
+ *   convex-setup        - Login check, team selection, project creation (non-interactive)
+ *   configure           - Set up webhook + Convex env vars (run after Convex setup)
+ *   detect-port         - Find an available port starting from 3000
+ *   write-install-summary - Write installation summary to docs/INSTALL.md
  *
  * All input comes from CLI arguments (no interactive prompts).
  * Designed to be called by the /install Claude Code command.
@@ -16,6 +18,7 @@
  *   node scripts/setup.mjs init --site-name="My App" --admin-email="me@example.com" --clerk-pk=pk_test_... --clerk-sk=sk_test_...
  *   node scripts/setup.mjs convex-setup --project-name="My App" [--team=team-slug]
  *   node scripts/setup.mjs configure --clerk-sk=sk_test_... --admin-email="me@example.com"
+ *   node scripts/setup.mjs write-install-summary [--claim-url=...] [--accountless=true] [--completed-steps=...] [--manual-steps=...]
  */
 
 import { createClerkClient } from '@clerk/backend';
@@ -663,6 +666,84 @@ async function runDetectPort() {
 }
 
 // ---------------------------------------------------------------------------
+// write-install-summary Subcommand
+// ---------------------------------------------------------------------------
+
+async function runWriteInstallSummary(args) {
+  const claimUrl = args['claim-url'] || '';
+  const accountless = args['accountless'] === 'true';
+
+  const completedSteps = (args['completed-steps'] || '').split(',').filter(Boolean);
+  const manualSteps = (args['manual-steps'] || '').split(',').filter(Boolean);
+
+  const lines = [
+    `# Installation Complete!`,
+    ``,
+    `## Automated Steps`,
+    ``,
+  ];
+
+  for (const step of completedSteps) {
+    lines.push(`- ${step}`);
+  }
+
+  if (claimUrl && accountless) {
+    lines.push(``);
+    lines.push(`## Claim Your Clerk App`);
+    lines.push(``);
+    lines.push(`Visit: ${claimUrl}`);
+    lines.push(``);
+    lines.push(`Click the **Claim** button to create your Clerk account — then skip the remaining`);
+    lines.push(`setup steps on that page, as the installer has already configured everything for you.`);
+    lines.push(`Refresh the page after claiming to access your Clerk dashboard.`);
+  }
+
+  if (manualSteps.length > 0) {
+    lines.push(``);
+    lines.push(`## Remaining Manual Steps`);
+    lines.push(``);
+    for (const step of manualSteps) {
+      lines.push(`- [ ] ${step}`);
+    }
+  }
+
+  lines.push(``);
+  lines.push(`## Optional Steps (can be done later)`);
+  lines.push(``);
+  lines.push(`These are only needed when you're ready to enable paid subscriptions:`);
+  lines.push(``);
+  lines.push(`1. **Enable Billing** in Clerk Dashboard:`);
+  lines.push(`   - Go to Clerk Dashboard > Billing > Settings > Enable Billing`);
+  lines.push(`2. **Create a Subscription Plan**:`);
+  lines.push(`   - Clerk Dashboard > Billing > Plans > Create Plan`);
+  lines.push(`   - Name it, set monthly price, save`);
+  lines.push(``);
+
+  lines.push(`## Start Development`);
+  lines.push(``);
+  lines.push(`Terminal 1: \`npx convex dev\``);
+  lines.push(`Terminal 2: \`npm run dev\``);
+  lines.push(``);
+  lines.push(`The URL to access your app will be shown in Terminal 2 output.`);
+  lines.push(``);
+
+  const content = lines.join('\n');
+  const docsDir = path.join(ROOT_DIR, 'docs');
+  if (!fs.existsSync(docsDir)) {
+    fs.mkdirSync(docsDir, { recursive: true });
+  }
+
+  const summaryPath = path.join(docsDir, 'INSTALL.md');
+  fs.writeFileSync(summaryPath, content, 'utf-8');
+
+  console.log(JSON.stringify({
+    success: true,
+    path: 'docs/INSTALL.md',
+    absolutePath: summaryPath,
+  }));
+}
+
+// ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 
@@ -682,11 +763,15 @@ switch (command) {
   case 'detect-port':
     await runDetectPort();
     break;
+  case 'write-install-summary':
+    await runWriteInstallSummary(args);
+    break;
   default:
     console.error(`Usage:
   node scripts/setup.mjs init --site-name="My App" --admin-email="me@example.com" [--clerk-pk=... --clerk-sk=...]
   node scripts/setup.mjs convex-setup --project-name="My App" [--team=SLUG]
   node scripts/setup.mjs configure --clerk-sk=... --admin-email="me@example.com"
-  node scripts/setup.mjs detect-port`);
+  node scripts/setup.mjs detect-port
+  node scripts/setup.mjs write-install-summary [--claim-url=...] [--accountless=true] [--completed-steps=...] [--manual-steps=...]`);
     process.exit(1);
 }

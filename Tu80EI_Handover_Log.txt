@@ -1,0 +1,67 @@
+START (copy all)
+Tu80EI Group — HarperOS Build Handover Log (v1.0)
+Date: 2026-02-09
+Owner: Debbie Letoa (Construction PM / AI Integration)
+Assistant: TeRa
+
+What we built (MVP)
+Secure Vibe Coding OS running locally (Next.js + Turbopack).
+Clerk authentication working (you were able to sign in as ttuaiti@gmail.com).
+Convex backend working (development cloud deployment: lovable-caribou-519).
+Telegram bot bridge working: Telegram voice note -> OpenAI Whisper -> saved to Convex table “notes”.
+Proof it works (hard evidence)
+Telegram bot replied “Note saved!” with transcription.
+Convex dashboard shows 2+ records in Data -> notes table with:
+text (transcriptions)
+telegramUserId
+audioDuration
+audioFileId
+timestamps / _creationTime
+Services / processes (what must be running)
+A) Convex backend (memory bank)
+Command: npx convex dev
+Expected: “Convex functions ready!”
+B) Next.js frontend (site office)
+
+Command: npm run dev
+Expected: prints Local: http://localhost:3000 or http://localhost:3001 (port can shift)
+C) Telegram bridge (comms tower)
+
+Command: node telegram-bridge.mjs
+Expected: “Telegram bot is running! Send voice notes…”
+Current snag
+Goal: display Convex notes inside the UI.
+Attempted: create page at /notes (app/notes/page.tsx) using useQuery(api.notes.*.list).
+Error seen: CONVEX Q(notes:list) / notes/functions:list “Could not find public function…”
+Also saw hydration warnings (dev overlay).
+Next task (what to do next session)
+Confirm Convex function exports for list query and that generated api matches.
+Align Convex function file location + export name with the call used in app/notes/page.tsx.
+Once list query works: show latest notes in /notes and/or embed in /dashboard.
+Quick “restart” checklist
+Start Convex: npx convex dev
+Start frontend: npm run dev (use whatever Local URL it prints)
+Start bridge: node telegram-bridge.mjs
+Send Telegram voice note -> confirm “Note saved!”
+Confirm Convex dashboard: Data -> notes shows new row
+Instruction for new chat:
+“TeRa, use this handover log as the full history. I want to fix the UI so /notes shows the saved Convex notes.”
+
+END
+2) Upload it to Google Drive in your folder path
+In Google Drive:
+
+Create folders (if not already):
+Tu80EI Group
+HarperOS
+Build Logs
+Upload Tu80EI_Handover_Log.txt into:
+Tu80EI Group/HarperOS/Build Logs/
+3) In the new chat (best recall)
+Upload either:
+
+Tu80EI_Handover_Log.txt (fast), or
+the PDF if you also print-to-PDF later,
+Then say:
+
+“TeRa, use this file as the full history and continue from the end.”

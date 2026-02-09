@@ -27,10 +27,16 @@ export default defineSchema({
       telegramUsername: v.optional(v.string()),
       audioFileId: v.string(),
       audioDuration: v.optional(v.number()),
+      status: v.optional(v.union(
+        v.literal("todo"),
+        v.literal("in_progress"),
+        v.literal("done")
+      )),
     })
       .index("byTelegramUser", ["telegramUserId", "timestamp"])
       .index("byUser", ["userId", "timestamp"])
-      .index("byTimestamp", ["timestamp"]),
+      .index("byTimestamp", ["timestamp"])
+      .index("byStatus", ["status", "timestamp"]),
 
     // Security monitoring table
     // userId is optional to allow logging violations from unauthenticated requests

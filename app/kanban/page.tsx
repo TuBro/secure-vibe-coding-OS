@@ -1,0 +1,1 @@
+export default function KanbanPage() { return ( <div style={{padding: '50px', color: 'white', backgroundColor: 'black', minHeight: '100vh'}}><h1>Kanban Board</h1><p>Site under construction. Kanban deck is being laid.</p></div> ); } 

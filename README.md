@@ -1922,4 +1922,5 @@ This project is licensed under the MIT License.
 
 Built with ❤️ using Next.js 15, Convex, Clerk, and modern web technologies.
 #   t r i g g e r   d e p l o y  
+ #   d e p l o y   t r i g g e r  
  

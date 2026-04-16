@@ -3,6 +3,7 @@
 import { TokenUsageTracker } from "./token-usage-tracker";
 import { SiteKanbanBoard } from "./site-kanban-board";
 import { LeadsKanbanBoard } from "./leads-kanban-board";
+import { CommsHub } from "./comms-hub";
 
 export function SiteOperations() {
   return (
@@ -11,6 +12,11 @@ export function SiteOperations() {
       {/* Sales Pipeline — Mission Control */}
       <div>
         <LeadsKanbanBoard />
+      </div>
+
+      {/* Communications — Unified Inbox */}
+      <div>
+        <CommsHub />
       </div>
 
       {/* Voice Notes — Task Board */}

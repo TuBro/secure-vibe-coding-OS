@@ -38,6 +38,32 @@ export default defineSchema({
       .index("byTimestamp", ["timestamp"])
       .index("byStatus", ["status", "timestamp"]),
 
+    // Unified communications — all outreach across channels
+    messages: defineTable({
+      channel: v.union(
+        v.literal("telegram"),
+        v.literal("whatsapp"),
+        v.literal("email"),
+        v.literal("call"),
+        v.literal("other")
+      ),
+      direction: v.union(
+        v.literal("inbound"),
+        v.literal("outbound")
+      ),
+      body: v.string(),
+      from: v.optional(v.string()),
+      to: v.optional(v.string()),
+      leadId: v.optional(v.id("leads")),
+      isRead: v.boolean(),
+      timestamp: v.number(),
+      createdAt: v.number(),
+    })
+      .index("byTimestamp", ["timestamp"])
+      .index("byLead", ["leadId", "timestamp"])
+      .index("byChannel", ["channel", "timestamp"])
+      .index("byUnread", ["isRead", "timestamp"]),
+
     // Sales leads pipeline
     leads: defineTable({
       name: v.string(),

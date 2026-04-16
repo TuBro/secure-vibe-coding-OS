@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "convex/react";
-import { IconTrendingUp, IconUsers, IconMicrophone, IconStar } from "@tabler/icons-react";
+import { IconTrendingUp, IconUsers, IconMicrophone, IconInbox } from "@tabler/icons-react";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -16,6 +16,7 @@ import { api } from "../../convex/_generated/api";
 export function SectionCards() {
   const leadStats = useQuery(api.leads.getStats);
   const notes = useQuery(api.notes.list);
+  const commsStats = useQuery(api.messages.getStats);
 
   const todayStart = new Date();
   todayStart.setHours(0, 0, 0, 0);
@@ -99,26 +100,28 @@ export function SectionCards() {
         </CardFooter>
       </Card>
 
-      {/* Qualified Leads */}
+      {/* Unread Messages */}
       <Card className="@container/card">
         <CardHeader>
-          <CardDescription>Qualified</CardDescription>
+          <CardDescription>Unread Messages</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            {leadStats ? leadStats.byStatus.qualified : "—"}
+            {commsStats ? commsStats.unread : "—"}
           </CardTitle>
           <CardAction>
             <Badge variant="outline">
-              <IconStar size={12} />
-              Ready
+              <IconInbox size={12} />
+              Inbox
             </Badge>
           </CardAction>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
           <div className="line-clamp-1 flex gap-2 font-medium">
-            {leadStats ? `${leadStats.byStatus.closed} closed` : "Loading..."}
+            {commsStats ? `${commsStats.todayTotal} messages today` : "Loading..."}
             <IconTrendingUp className="size-4" />
           </div>
-          <div className="text-muted-foreground">Leads ready to close</div>
+          <div className="text-muted-foreground">
+            {commsStats ? `${commsStats.total} total across all channels` : "Telegram · WhatsApp · Email · Call"}
+          </div>
         </CardFooter>
       </Card>
 

@@ -38,6 +38,32 @@ export default defineSchema({
       .index("byTimestamp", ["timestamp"])
       .index("byStatus", ["status", "timestamp"]),
 
+    // Sales leads pipeline
+    leads: defineTable({
+      name: v.string(),
+      company: v.optional(v.string()),
+      email: v.optional(v.string()),
+      phone: v.optional(v.string()),
+      source: v.optional(v.union(
+        v.literal("voice"),
+        v.literal("email"),
+        v.literal("referral"),
+        v.literal("manual")
+      )),
+      status: v.union(
+        v.literal("new"),
+        v.literal("contacted"),
+        v.literal("qualified"),
+        v.literal("closed")
+      ),
+      notes: v.optional(v.string()),
+      assignedTo: v.optional(v.string()),
+      lastContactedAt: v.optional(v.number()),
+      createdAt: v.number(),
+    })
+      .index("byStatus", ["status", "createdAt"])
+      .index("byCreatedAt", ["createdAt"]),
+
     // Security monitoring table
     // userId is optional to allow logging violations from unauthenticated requests
     securityEvents: defineTable({

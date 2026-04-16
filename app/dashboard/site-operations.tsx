@@ -2,15 +2,33 @@
 
 import { TokenUsageTracker } from "./token-usage-tracker";
 import { SiteKanbanBoard } from "./site-kanban-board";
+import { LeadsKanbanBoard } from "./leads-kanban-board";
 
 export function SiteOperations() {
   return (
-    <div className="px-4 lg:px-6 mb-8">
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-slate-800 mb-4">Site Operations</h2>
+    <div className="px-4 lg:px-6 mb-8 space-y-10">
+
+      {/* Sales Pipeline — Mission Control */}
+      <div>
+        <LeadsKanbanBoard />
+      </div>
+
+      {/* Voice Notes — Task Board */}
+      <div>
+        <div className="mb-4">
+          <h2 className="text-lg font-semibold text-slate-800">Voice Notes Board</h2>
+        </div>
+        <SiteKanbanBoard />
+      </div>
+
+      {/* System */}
+      <div>
+        <div className="mb-4">
+          <h2 className="text-lg font-semibold text-slate-800">System</h2>
+        </div>
         <TokenUsageTracker />
       </div>
-      <SiteKanbanBoard />
+
     </div>
   );
 }

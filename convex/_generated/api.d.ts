@@ -9,6 +9,7 @@
  */
 
 import type * as http from "../http.js";
+import type * as leads from "../leads.js";
 import type * as lib_securityLogger from "../lib/securityLogger.js";
 import type * as notes from "../notes.js";
 import type * as paymentAttemptTypes from "../paymentAttemptTypes.js";
@@ -25,6 +26,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   http: typeof http;
+  leads: typeof leads;
   "lib/securityLogger": typeof lib_securityLogger;
   notes: typeof notes;
   paymentAttemptTypes: typeof paymentAttemptTypes;

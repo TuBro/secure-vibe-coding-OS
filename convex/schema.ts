@@ -38,6 +38,111 @@ export default defineSchema({
       .index("byTimestamp", ["timestamp"])
       .index("byStatus", ["status", "timestamp"]),
 
+    // Marketing campaigns
+    campaigns: defineTable({
+      name: v.string(),
+      channel: v.union(
+        v.literal("email"),
+        v.literal("social"),
+        v.literal("ad"),
+        v.literal("content"),
+        v.literal("other")
+      ),
+      status: v.union(
+        v.literal("draft"),
+        v.literal("active"),
+        v.literal("paused"),
+        v.literal("complete")
+      ),
+      goal: v.optional(v.string()),
+      targetAudience: v.optional(v.string()),
+      budget: v.optional(v.number()),
+      startDate: v.optional(v.number()),
+      endDate: v.optional(v.number()),
+      brief: v.optional(v.string()),
+      createdAt: v.number(),
+    })
+      .index("byStatus", ["status", "createdAt"])
+      .index("byCreatedAt", ["createdAt"]),
+
+    // Support tickets
+    tickets: defineTable({
+      title: v.string(),
+      body: v.string(),
+      status: v.union(
+        v.literal("open"),
+        v.literal("in_progress"),
+        v.literal("resolved"),
+        v.literal("closed")
+      ),
+      priority: v.union(
+        v.literal("low"),
+        v.literal("medium"),
+        v.literal("high"),
+        v.literal("urgent")
+      ),
+      source: v.union(
+        v.literal("telegram"),
+        v.literal("email"),
+        v.literal("whatsapp"),
+        v.literal("manual")
+      ),
+      assignedTo: v.optional(v.string()),
+      leadId: v.optional(v.id("leads")),
+      resolvedAt: v.optional(v.number()),
+      createdAt: v.number(),
+    })
+      .index("byStatus", ["status", "createdAt"])
+      .index("byPriority", ["priority", "createdAt"])
+      .index("byLead", ["leadId", "createdAt"]),
+
+    // Social media content queue
+    content: defineTable({
+      body: v.string(),
+      platform: v.union(
+        v.literal("instagram"),
+        v.literal("linkedin"),
+        v.literal("facebook"),
+        v.literal("twitter"),
+        v.literal("telegram"),
+        v.literal("other")
+      ),
+      status: v.union(
+        v.literal("idea"),
+        v.literal("scheduled"),
+        v.literal("posted")
+      ),
+      scheduledAt: v.optional(v.number()),
+      postedAt: v.optional(v.number()),
+      campaignId: v.optional(v.id("campaigns")),
+      createdAt: v.number(),
+    })
+      .index("byStatus", ["status", "createdAt"])
+      .index("byPlatform", ["platform", "status"]),
+
+    // Bookings / calendar
+    bookings: defineTable({
+      title: v.string(),
+      type: v.union(
+        v.literal("meeting"),
+        v.literal("call"),
+        v.literal("event"),
+        v.literal("other")
+      ),
+      status: v.union(
+        v.literal("confirmed"),
+        v.literal("pending"),
+        v.literal("cancelled")
+      ),
+      date: v.number(),
+      contact: v.optional(v.string()),
+      leadId: v.optional(v.id("leads")),
+      notes: v.optional(v.string()),
+      createdAt: v.number(),
+    })
+      .index("byDate", ["date"])
+      .index("byStatus", ["status", "date"]),
+
     // Unified communications — all outreach across channels
     messages: defineTable({
       channel: v.union(

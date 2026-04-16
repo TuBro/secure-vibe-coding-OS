@@ -8,6 +8,9 @@
  * @module
  */
 
+import type * as bookings from "../bookings.js";
+import type * as campaigns from "../campaigns.js";
+import type * as content from "../content.js";
 import type * as http from "../http.js";
 import type * as leads from "../leads.js";
 import type * as lib_securityLogger from "../lib/securityLogger.js";
@@ -17,6 +20,7 @@ import type * as paymentAttemptTypes from "../paymentAttemptTypes.js";
 import type * as paymentAttempts from "../paymentAttempts.js";
 import type * as security from "../security.js";
 import type * as seedSecurityEvents from "../seedSecurityEvents.js";
+import type * as tickets from "../tickets.js";
 import type * as users from "../users.js";
 
 import type {
@@ -26,6 +30,9 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  bookings: typeof bookings;
+  campaigns: typeof campaigns;
+  content: typeof content;
   http: typeof http;
   leads: typeof leads;
   "lib/securityLogger": typeof lib_securityLogger;
@@ -35,6 +42,7 @@ declare const fullApi: ApiFromModules<{
   paymentAttempts: typeof paymentAttempts;
   security: typeof security;
   seedSecurityEvents: typeof seedSecurityEvents;
+  tickets: typeof tickets;
   users: typeof users;
 }>;
 

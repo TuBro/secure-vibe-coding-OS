@@ -1,12 +1,12 @@
 # 11 — Agreements & Signing
 
 **Section:** Agreements  
-**Tool:** Manual process — digital or physical signature  
+**Tool:** DocuSign  
 **Location:** Completed before access is granted
 
 ---
 
-> **Note:** This is the manual process for now. This document is designed to be executed by smart contract on-chain in a future phase. The structure here is the same structure the smart contract will follow — nothing will need to be rewritten, only automated.
+> **Note:** Signing is done via DocuSign. This document is designed to be executed by smart contract on-chain in a future phase. The structure here is the same structure the smart contract will follow — nothing will need to be rewritten, only automated.
 
 ---
 
@@ -31,6 +31,27 @@ The agreement is not a barrier. It is an alignment check. If someone is not will
 
 ---
 
+## How To Send the Agreement via DocuSign
+
+1. Log in to your DocuSign account
+2. Upload the Vaka Tu80 Core Member Agreement template
+3. Add the member as a recipient — enter their full name and email address
+4. Add yourself as the second signer
+5. Set the signing order — member signs first, operator countersigns
+6. Add the required fields to the document:
+   - Member full name
+   - Role
+   - Organisation
+   - Date
+   - Member signature
+   - Operator signature
+7. Click **Send** — DocuSign delivers the agreement to the member's email
+8. Member signs from their email — no account required on their end
+9. You receive a notification to countersign
+10. Both parties receive a fully executed copy automatically
+
+---
+
 ## The Vaka Tu80 Core Member Agreement
 
 ### What the Member Is Agreeing To
@@ -46,7 +67,7 @@ By signing this agreement the member confirms they:
 
 ---
 
-## Agreement Sign-Off
+## Agreement Text
 
 **Vaka Tu80 Core — Member Agreement**
 
@@ -73,25 +94,27 @@ I understand this agreement will in future be executed and recorded on-chain as 
 
 ## After Signing
 
-Once the agreement is signed:
+Once DocuSign confirms both parties have signed:
 
-1. File the signed copy — digital or physical
+1. The executed copy is automatically saved in DocuSign — no manual filing needed
 2. Proceed to [10 — Onboarding](10-onboarding.md)
 3. Grant system access only after Step 1 of onboarding is complete
 
 ---
 
-## Future State — Smart Contract Execution
+## Future State — DocuSign to Smart Contract
 
-When this process moves on-chain:
+**Phase 2 — DocuSign + System Integration**
+When a member signs via DocuSign, a webhook triggers automatically and grants system access without the operator having to do it manually.
 
-- The agreement will be a smart contract deployed on a blockchain
-- The member signs with their wallet — the signature is cryptographically verified
+**Phase 3 — Smart Contract Execution**
+- The agreement becomes a smart contract deployed on a blockchain
+- The member signs with their wallet — cryptographically verified
 - The contract executes automatically — access is granted the moment both parties sign
-- The record is permanent and immutable — it cannot be altered or disputed
+- The record is permanent and immutable — cannot be altered or disputed
 - No operator needs to be present — the contract enforces the process
 
-The manual process you follow today is the exact logic the smart contract will execute tomorrow.
+The DocuSign process you follow today is the exact logic the smart contract will execute tomorrow.
 
 ---
 

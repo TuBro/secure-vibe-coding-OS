@@ -42,7 +42,7 @@ export default function HeroSection() {
                                     <div className="bg-background rounded-(--radius) relative mx-auto overflow-hidden border border-transparent shadow-lg shadow-black/10 ring-1 ring-black/10">
                                         <Image
                                             src="/hero-section-main-app-dark.png"
-                                            alt="Secure Vibe Coding dashboard"
+                                            alt="Vaka Tu80 Core OS dashboard"
                                             width={2856}
                                             height={1798}
                                             priority

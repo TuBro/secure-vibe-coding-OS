@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { ChatMaxingIconColoured } from '@/components/logo'
+import Image from 'next/image'
 import { Loader2, Menu, X, Moon, Sun } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -55,8 +55,8 @@ export const HeroHeader = () => {
                                 href="/"
                                 aria-label="home"
                                 className="flex items-center space-x-2">
-                                <ChatMaxingIconColoured />
-                                <span className="text-xl font-medium">{process.env.NEXT_PUBLIC_SITE_NAME || 'More Secure Starter'}</span>
+                                <Image src="/logo.webp" alt="Vaka Tu80 Core OS" width={36} height={36} className="rounded-full" />
+                                <span className="text-xl font-medium">{process.env.NEXT_PUBLIC_SITE_NAME || 'Vaka Tu80 Core OS'}</span>
                             </Link>
 
                             <button

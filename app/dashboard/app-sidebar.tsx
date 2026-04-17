@@ -38,7 +38,7 @@ import {
   SidebarGroup,
   SidebarGroupLabel,
 } from "@/components/ui/sidebar"
-import { ChatMaxingIconColoured } from "@/components/logo"
+import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { useQuery } from "convex/react"
@@ -142,8 +142,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
               <Link href="/">
-                <ChatMaxingIconColoured className="!size-6" />
-                <span className="text-base font-semibold">{process.env.NEXT_PUBLIC_SITE_NAME || 'More Secure Starter'}</span>
+                <Image src="/logo.webp" alt="Vaka Tu80 Core OS" width={28} height={28} className="rounded-full" />
+                <span className="text-base font-semibold">{process.env.NEXT_PUBLIC_SITE_NAME || 'Vaka Tu80 Core OS'}</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

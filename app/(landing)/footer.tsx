@@ -1,4 +1,4 @@
-import { ChatMaxingIconColoured } from '@/components/logo'
+import Image from 'next/image'
 import Link from 'next/link'
 
 const links = [
@@ -36,8 +36,8 @@ export default function FooterSection() {
                     href="/"
                     aria-label="go home"
                     className="flex mx-auto gap-2 items-center size-fit">
-                    <ChatMaxingIconColoured />
-                    <span className="text-xl font-medium">{process.env.NEXT_PUBLIC_SITE_NAME || 'More Secure Starter'}</span>
+                    <Image src="/logo.webp" alt="Vaka Tu80 Core OS" width={36} height={36} className="rounded-full" />
+                    <span className="text-xl font-medium">{process.env.NEXT_PUBLIC_SITE_NAME || 'Vaka Tu80 Core OS'}</span>
                 </Link>
 
                 <div className="my-8 flex flex-wrap justify-center gap-6 text-sm">

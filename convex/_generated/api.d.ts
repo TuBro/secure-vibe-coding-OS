@@ -19,7 +19,9 @@ import type * as notes from "../notes.js";
 import type * as paymentAttemptTypes from "../paymentAttemptTypes.js";
 import type * as paymentAttempts from "../paymentAttempts.js";
 import type * as security from "../security.js";
+import type * as seed from "../seed.js";
 import type * as seedSecurityEvents from "../seedSecurityEvents.js";
+import type * as tasks from "../tasks.js";
 import type * as tickets from "../tickets.js";
 import type * as users from "../users.js";
 
@@ -41,7 +43,9 @@ declare const fullApi: ApiFromModules<{
   paymentAttemptTypes: typeof paymentAttemptTypes;
   paymentAttempts: typeof paymentAttempts;
   security: typeof security;
+  seed: typeof seed;
   seedSecurityEvents: typeof seedSecurityEvents;
+  tasks: typeof tasks;
   tickets: typeof tickets;
   users: typeof users;
 }>;

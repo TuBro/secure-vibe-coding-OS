@@ -27,13 +27,8 @@ export function SiteOperations() {
       {/* Social Media + Calendar */}
       <div><SocialCalendar /></div>
 
-      {/* Voice Notes Board */}
-      <div>
-        <div className="mb-4">
-          <h2 className="text-lg font-semibold text-slate-800">Voice Notes Board</h2>
-        </div>
-        <SiteKanbanBoard />
-      </div>
+      {/* Task Board */}
+      <div><SiteKanbanBoard /></div>
 
       {/* System */}
       <div>

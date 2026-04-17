@@ -195,6 +195,21 @@ export default defineSchema({
       .index("byStatus", ["status", "createdAt"])
       .index("byCreatedAt", ["createdAt"]),
 
+    // Manual task board — To Do / In Progress / Done
+    tasks: defineTable({
+      title: v.string(),
+      notes: v.optional(v.string()),
+      status: v.union(
+        v.literal("todo"),
+        v.literal("in_progress"),
+        v.literal("done")
+      ),
+      createdBy: v.optional(v.string()),
+      createdAt: v.number(),
+    })
+      .index("byStatus", ["status", "createdAt"])
+      .index("byCreatedAt", ["createdAt"]),
+
     // Security monitoring table
     // userId is optional to allow logging violations from unauthenticated requests
     securityEvents: defineTable({

@@ -97,3 +97,6 @@ Learn the manual process first. Master it. Then we automate the parts that don't
 - [06 — Support Tickets](06-support-tickets.md)
 - [07 — Social Calendar](07-social-calendar.md)
 - [08 — System & Admin](08-system.md)
+- [09 — Handover & Audit](09-handover-audit.md)
+- [10 — Onboarding](10-onboarding.md)
+- [11 — Agreements & Signing](11-agreements.md)

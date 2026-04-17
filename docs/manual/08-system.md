@@ -94,8 +94,6 @@ You will know it is time to automate when you find yourself checking the same pa
 
 ---
 
-## You Have Reached the End of the Manual
+## Next Section
 
-You now have a complete picture of every section in the system. Start with the Task Board. Work through each section in order. Do it manually until it feels natural.
-
-Then we automate.
+[09 — Handover & Audit](09-handover-audit.md)
